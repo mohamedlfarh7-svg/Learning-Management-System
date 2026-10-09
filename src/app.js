@@ -9,7 +9,7 @@ import swaggerSpec from "./config/swagger.js";
 const app = express();
 
 app.use(express.json());
-app.use(morgan('dev'))
+app.use(morgan('common'))
 app.use("/api", routes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 

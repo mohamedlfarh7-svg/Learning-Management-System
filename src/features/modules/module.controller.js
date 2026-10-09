@@ -24,3 +24,17 @@ async function getOneWithResources(req, res, next) {
 }
 
 export { getOneWithResources }
+
+export async function createModule(req, res, next){
+	try{
+		const newModule = await createModuleService(req.body);
+		return res.status(201).json({
+            success: true,
+            message: "Module créé avec succès",
+            data: newModule
+        });
+	}catch(error){
+		return next(error);
+	}
+}
+

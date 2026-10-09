@@ -22,8 +22,11 @@
   },
   "homepage": "https://github.com/mohamed-bouth/Learning-Management-System#readme",
   "dependencies": {
+    "argon2": "^0.45.1",
+    "crypto": "^1.0.1",
     "dotenv": "^18.0.4",
     "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.10.3",
     "morgan": "^1.12.1",
     "nodemon": "^3.1.14",
