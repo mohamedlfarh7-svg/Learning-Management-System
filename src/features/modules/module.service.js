@@ -26,3 +26,13 @@ export async function createModuleService (moduleData){
 
     return newModule;
 }
+
+export async function updateModuleService(moduleId, updateData) {
+    const updateModel=  await Module.findByIdAndUpdate(moduleId,updateData,{new: true,runValidators: true })
+    if(!updateModel){
+        const error = new Error("Le module spécifié est introuvable");
+        error.statusCode = 404;
+        throw error;
+    }
+    return updateModel
+}

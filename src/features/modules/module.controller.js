@@ -1,4 +1,4 @@
-import { getModuleById } from "./module.service.js"
+import { getModuleById,createModuleService,updateModuleService } from "./module.service.js"
 
 async function getOneWithResources(req, res, next) {
 	try {
@@ -31,10 +31,26 @@ export async function createModule(req, res, next){
 		return res.status(201).json({
             success: true,
             message: "Module créé avec succès",
-            data: newModule
+            data: {newModule}
         });
 	}catch(error){
 		return next(error);
 	}
 }
+
+export async function updateModule(req,res,next) {
+	try{
+		const { id } = req.params;
+        const updateData = req.body;
+		const updatedModule =  await updateModuleService(id,updateData);
+		return res.status(200).json({
+            success: true,
+            message: "Module mis à jour avec succès",
+            data: {updatedModule}
+        });
+	}catch(error){
+		next(error)
+	}
+}
+
 
