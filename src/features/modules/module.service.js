@@ -1,5 +1,6 @@
 import Module from "./module.module.js"
 import Resource from "../resources/resource.module.js"
+import { Model } from "mongoose"
 
 async function getModuleById(moduleId, collections = []) {
 
@@ -42,4 +43,9 @@ export async function reorderModulesService(modulesOrder){
         await Module.findByIdAndUpdate(item.id,{order:item.order})
     }
     return true
+}
+
+export async function  getModulesByCourseService(courseID) {
+    const modules = (await Model.find({course:courseID })).sort({order:1});
+    return modules;
 }

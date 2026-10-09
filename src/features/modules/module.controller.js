@@ -1,4 +1,4 @@
-import { getModuleById,createModuleService,updateModuleService , reorderModulesService} from "./module.service.js"
+import { getModuleById,createModuleService,updateModuleService , reorderModulesService,getModulesByCourseService} from "./module.service.js"
 
 async function getOneWithResources(req, res, next) {
 	try {
@@ -75,3 +75,17 @@ export async function reorderModules(req, res, next) {
     }
 }
 
+export async function getModule(req,res,next) {
+	try{
+		const {courseID} = req.params
+		const modules = await getModulesByCourseService(courseID)
+		return res.status(200).json({
+            success: true,
+			count: modules.length,
+            data: {modules}
+        });
+
+	}catch(error){
+		next(error)
+	}
+}

@@ -3,7 +3,8 @@ import {
     getOneWithResources,
     createModule,
     updateModule,
-    reorderModules
+    reorderModules,
+    getModule
 } from "./module.controller.js"
 import { authorize } from "../../middleware/authorize.js";
 
@@ -13,5 +14,6 @@ router.get('/:id/resources' , getOneWithResources)
 router.post("/", authorize("module:create"), createModule);
 router.put('/:id',authorize("module:update"),updateModule)
 router.patch("/reorder", authorize("module:update"), reorderModules);
+router.get("/course/:courseId", authorize("module:read"), getModules);
 
 export default router
