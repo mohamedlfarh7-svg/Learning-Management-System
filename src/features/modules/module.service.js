@@ -36,3 +36,10 @@ export async function updateModuleService(moduleId, updateData) {
     }
     return updateModel
 }
+
+export async function reorderModulesService(modulesOrder){
+    for (const item of modulesOrder){
+        await Module.findByIdAndUpdate(item.id,{order:item.order})
+    }
+    return true
+}

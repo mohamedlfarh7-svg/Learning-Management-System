@@ -1,4 +1,4 @@
-import { getModuleById,createModuleService,updateModuleService } from "./module.service.js"
+import { getModuleById,createModuleService,updateModuleService , reorderModulesService} from "./module.service.js"
 
 async function getOneWithResources(req, res, next) {
 	try {
@@ -53,4 +53,25 @@ export async function updateModule(req,res,next) {
 	}
 }
 
+export async function reorderModules(req, res, next) {
+    try {
+        const { modules } = req.body;
+
+        if (!modules || !Array.isArray(modules)) {
+            const error = new Error("Format de données invalide. Un tableau de modules est requis.");
+            error.statusCode = 400;
+            return next(error);
+        }
+
+        await reorderModulesService(modules);
+
+        return res.status(200).json({
+            success: true,
+            message: "L'ordre des modules a été mis à jour avec succès"
+        });
+
+    } catch (error) {
+        return next(error);
+    }
+}
 
